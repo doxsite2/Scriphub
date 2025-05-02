@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dash Scripts</title>
+    <style>
+        :root {
+            --primary: #4B56D2;
+            --secondary: #82C3EC;
+            --background: #111827;
+            --card-bg: #1F2937;
+            --text: #F9FAFB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: #9CA3AF;
+            font-size: 1rem;
+        }
+
+        main {
+            max-width: 1000px;
+            width: 100%;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex: 1;
+        }
+
+        .scripts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .script-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .script-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .script-header {
+            padding: 1rem;
+            background-color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .script-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .script-badge {
+            background-color: #EF4444;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        .script-content {
+            padding: 1rem;
+            display: none;
+        }
+
+        .script-code {
+            background-color: #374151;
+            padding: 1rem;
+            border-radius: 4px;
+            color: #E5E7EB;
+            font-family: monospace;
+            margin-bottom: 1rem;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background-color: #3A45C0;
+        }
+
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+
+        .copy-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .coming-soon {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            margin-top: 2rem;
+            border: 2px dashed #4B5563;
+        }
+
+        .coming-soon h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .ad-container {
+            margin: 3rem auto;
+            max-width: 560px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .ad-header {
+            background-color: var(--primary);
+            padding: 0.75rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--card-bg);
+            margin-top: auto;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background-color: #10B981;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Dash Scripts</h1>
+        <p class="subtitle">Premium Roblox Scripts Hub</p>
+    </header>
+
+    <main>
+        <div class="scripts-container">
+            <div class="script-card">
+                <div class="script-header">
+                    <span class="script-name">Pls Donate</span>
+                    <span class="script-badge">Popular</span>
+                </div>
+                <div class="script-content">
+                    <div class="script-code">loadstring(game:HttpGet("http://vpaste.net/OzKZh"))()</div>
+                    <button class="copy-btn">
+                        <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy Script
+                    </button>
+                </div>
+            </div>
+
+            <div class="script-card">
+                <div class="script-header">
+                    <span class="script-name">Bubble Gum Simulator Infinity</span>
+                    <span class="script-badge">New</span>
+                </div>
+                <div class="script-content">
+                    <div class="script-code">loadstring(game:HttpGet("http://vpaste.net/gPkYQ"))()</div>
+                    <button class="copy-btn">
+                        <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy Script
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="coming-soon">
+            <h2>More Scripts Coming Soon!</h2>
+            <p>Check back regularly for new premium scripts</p>
+        </div>
+
+        <div class="ad-container">
+            <div class="ad-header">Check Out This Awesome Video!</div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/J2rnMOJqWRM?si=YKie26h6U6myyznd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </main>
+
+    <div class="toast" id="toast">Copied to clipboard! ✅</div>
+
+    <footer>
+        <p>Dash Scripts &copy; 2025 - All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // Toggle script content visibility when clicking on header
+        document.querySelectorAll('.script-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const allContents = document.querySelectorAll('.script-content');
+                
+                // Close all other open script contents
+                allContents.forEach(item => {
+                    if (item !== content && item.style.display === 'block') {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Toggle current content
+                if (content.style.display === 'block') {
+                    content.style.display = 'none';
+                } else {
+                    content.style.display = 'block';
+                    
+                    // Add a small animation
+                    content.style.opacity = '0';
+                    setTimeout(() => {
+                        content.style.opacity = '1';
+                    }, 10);
+                }
+            });
+        });
+
+        // Copy button functionality
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent triggering the parent click event
+                
+                const scriptCode = btn.previousElementSibling.textContent;
+                navigator.clipboard.writeText(scriptCode);
+                
+                // Show toast notification
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                
+                // Hide toast after 2 seconds
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2000);
+                
+                // Button click animation
+                btn.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    btn.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+
+        // Add hover effect to script cards
+        document.querySelectorAll('.script-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
