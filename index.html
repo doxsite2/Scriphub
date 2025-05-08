@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1177449"></script><head>
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ads Shower</title>
@@ -11,13 +11,11 @@
       font-family: 'Orbitron', sans-serif;
       background: linear-gradient(to bottom, #1e1e1e, #111);
       color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       padding: 40px 20px;
     }
 
     h1 {
+      text-align: center;
       font-size: 3em;
       margin-bottom: 10px;
       color: #00ffff;
@@ -25,51 +23,29 @@
     }
 
     p {
+      text-align: center;
       color: #aaa;
       margin-bottom: 40px;
       font-size: 1.2em;
     }
 
-    .ad-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-      width: 100%;
-      max-width: 1200px;
-    }
-
-    .ad-box {
-      background: #222;
-      border: 2px solid #00ffff55;
-      padding: 10px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px #00ffff22;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      min-height: 250px;
-    }
-
-    .ad-box:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 25px #00ffff55;
+    .content {
+      max-width: 900px;
+      margin: 0 auto;
     }
   </style>
 
-  <!-- Required Ad Script (placed in head as per instructions) -->
+  <!-- Load ad script once (auto-injection assumed) -->
   <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1177449"></script>
 </head>
 <body>
 
   <h1>Ads Shower</h1>
-  <p>Enjoy the rain of ads!</p>
+  <p>Ads may appear anywhere on this page, as powered by the ad script.</p>
 
-  <div class="ad-container">
-    <!-- You can duplicate this block to add more ad boxes -->
-    <div class="ad-box"><script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1177449"></script></div>
-    <div class="ad-box"><script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1177449"></script></div>
-    <div class="ad-box"><script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1177449"></script></div>
-    <div class="ad-box"><script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1177449"></script></div>
-    <div class="ad-box"><script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1177449"></script></div>
-    <div class="ad-box"><script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1177449"></script></div>
+  <div class="content">
+    <p>This is some sample content. Ads can appear above, below, or inline depending on the script behavior.</p>
+    <p>You can duplicate this layout as needed and the ads will auto-load if supported.</p>
   </div>
 
 </body>
